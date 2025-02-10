@@ -48,9 +48,7 @@ def lambda_handler(event, context):
 
     # get a list of all valid search parameters
     valid_parameters = [
-        column.key
-        for column in query.columns
-        if column.key not in ["id"]
+        column.key for column in query.columns if column.key not in ["id"]
     ]
     # Up until this point, valid_parameters are the same as the
     # columns in the ScienceFiles table. And looks like we removed
