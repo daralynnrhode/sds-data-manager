@@ -318,6 +318,7 @@ def build_sds(
     ialirt_processing_construct.IalirtProcessing(
         scope=ialirt_stack,
         construct_id="IalirtProcessing",
+        env=env,
         vpc=networking.vpc,
         ports=ialirt_ports,
         ialirt_bucket=ialirt_bucket.ialirt_bucket,
