@@ -122,7 +122,7 @@ def lambda_handler(event, context):
     try:
         # file_obj will be None if it's not a SPICE file
         file_obj = file_obj or imap_data_access.ScienceFilePath(filename)
-    except imap_data_access.ScienceFilePath.InvalidScienceFileError as e:
+    except imap_data_access.ScienceFilePath.InvalidScienceFileError:
         # Not a SCIENCE file, continue on to ancillary files
         pass
 
