@@ -117,23 +117,20 @@ def lambda_handler(event, context):
         file_obj = imap_data_access.SPICEFilePath(filename)
     except imap_data_access.SPICEFilePath.InvalidSPICEFileError:
         # Not a SPICE file, continue on to science files
-        pass
-
-    try:
-        # file_obj will be None if it's not a SPICE file
-        file_obj = file_obj or imap_data_access.ScienceFilePath(filename)
-    except imap_data_access.ScienceFilePath.InvalidScienceFileError:
-        # Not a SCIENCE file, continue on to ancillary files
-        pass
-
-    try:
-        # file_obj will be None if it's not a SPICE file
-        file_obj = imap_data_access.AncillaryFilePath(filename)
-    except imap_data_access.AncillaryFilePath.InvalidAncillaryFileError as e:
-        # No ancillary, science, or spice file type matched, return an error with the
-        # exception message indicating how to fix it to the user
-        logger.error(str(e))
-        return {"statusCode": 400, "body": str(e)}
+        try:
+            # file_obj will be None if it's not a SPICE file
+            file_obj = file_obj or imap_data_access.ScienceFilePath(filename)
+        except imap_data_access.ScienceFilePath.InvalidScienceFileError:
+            # Not a SCIENCE file, continue on to ancillary files
+            try:
+                # file_obj will be None if it's not a SPICE file
+                file_obj = imap_data_access.AncillaryFilePath(filename)
+            except imap_data_access.AncillaryFilePath.InvalidAncillaryFileError as e:
+                # No ancillary, science, or spice file type matched,
+                # return an error with the
+                # exception message indicating how to fix it to the user
+                logger.error(str(e))
+                return {"statusCode": 400, "body": str(e)}
 
     s3_key_path = file_obj.construct_path()
     # Strip off the data directory to get the upload path + name
