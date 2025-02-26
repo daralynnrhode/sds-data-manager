@@ -40,7 +40,7 @@ def _file_exists(s3_key_path):
 
 
 def _generate_signed_upload_response(s3_key_path, tags=None):
-    """Create a presigned url for a file in the SDS storage bucket.
+    """Create a pre-signed url for a file in the SDS storage bucket.
 
     Parameters
     ----------
