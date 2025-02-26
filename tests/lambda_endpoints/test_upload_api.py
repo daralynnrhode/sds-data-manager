@@ -63,7 +63,7 @@ def test_spice_file_upload(s3_client, spice_file):
 
 
 def test_science_file_upload(s3_client, science_file):
-    """Test science  files being uploaded."""
+    """Test science files being uploaded."""
     event = {
         "version": "2.0",
         "routeKey": "$default",

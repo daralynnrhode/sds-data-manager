@@ -28,7 +28,7 @@ def _set_env(monkeypatch):
 
 @pytest.fixture(scope="module")
 def ancillary_file():
-    """Path to a valid  ancillary file."""
+    """Path to a valid ancillary file."""
     return "imap/swe/l1a/2010/01/imap_swe_test-ancillary-description_20100101_v000.cdf"
 
 
