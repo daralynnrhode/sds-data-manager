@@ -97,6 +97,7 @@ def test_ancillary_file_upload(s3_client, ancillary_file):
         "rawPath": "/",
         "pathParameters": {"proxy": ancillary_file},
     }
+    print("first upload: " + ancillary_file)
     response = upload_api.lambda_handler(event=event, context=None)
     assert response["statusCode"] == 200
 
@@ -112,6 +113,7 @@ def test_ancillary_file_upload(s3_client, ancillary_file):
         "rawPath": "/",
         "pathParameters": {"proxy": ancillary_file},
     }
+    print("second try: " + ancillary_file)
     response = upload_api.lambda_handler(event=event, context=None)
     assert response["statusCode"] == 409
 
