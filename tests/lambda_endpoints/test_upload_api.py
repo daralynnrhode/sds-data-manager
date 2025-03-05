@@ -102,9 +102,11 @@ def test_ancillary_file_upload(s3_client, ancillary_file):
     assert response["statusCode"] == 200
 
     # Try to upload again and we should get a 409 duplicate error
+    relative_path = ancillary_file.relative_to(ancillary_file.parts[0])
+    key = str(relative_path).replace(str(ancillary_file.parts[0]), "imap/ancillary/swe")
     s3_client.put_object(
         Bucket=os.getenv("S3_BUCKET"),
-        Key=str(ancillary_file),
+        Key=key,
         Body=b"test",
     )
     event = {
@@ -113,7 +115,7 @@ def test_ancillary_file_upload(s3_client, ancillary_file):
         "rawPath": "/",
         "pathParameters": {"proxy": ancillary_file},
     }
-    print(f"second upload:  {str(ancillary_file)}")
+    print(f"second upload:  {ancillary_file!s}")
     response = upload_api.lambda_handler(event=event, context=None)
     assert response["statusCode"] == 409
 
