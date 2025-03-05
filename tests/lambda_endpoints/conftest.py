@@ -30,7 +30,10 @@ def _set_env(monkeypatch):
 @pytest.fixture(scope="module")
 def ancillary_file():
     """Path to a valid ancillary file."""
-    return AncillaryFilePath("imap_swe_test-ancillary-description_20100101_v000.cdf").construct_path()
+    return AncillaryFilePath(
+        "imap_swe_test-ancillary-description_20100101_v000.cdf"
+    ).construct_path()
+
 
 @pytest.fixture(scope="module")
 def science_file():
