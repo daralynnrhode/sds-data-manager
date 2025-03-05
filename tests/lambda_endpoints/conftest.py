@@ -44,6 +44,15 @@ def spice_file():
     return "spice/ck/test_v000.bc"
 
 
+@pytest.fixture(scope="module")
+def invalid_file():
+    """Path for an invalid file."""
+    return (
+        "imap/swe/l1a/2010/01/imap_swe_l1a_test-description_"
+        "second-description_20100101_v000.cdf"
+    )
+
+
 @pytest.fixture(autouse=True, scope="module")
 def s3_client():
     """Mock S3 Client, so we don't need network requests."""

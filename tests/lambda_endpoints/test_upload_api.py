@@ -127,3 +127,15 @@ def test_input_parameters_missing():
 
     response = upload_api.lambda_handler(event=empty_para_event, context=None)
     assert response["statusCode"] == 400
+
+
+def test_incorrect_file_type(s3_client, invalid_file):
+    """Test that an error if thrown when file does not match any type."""
+    event = {
+        "version": "2.0",
+        "routeKey": "$default",
+        "rawPath": "/",
+        "pathParameters": {"proxy": invalid_file},
+    }
+    response = upload_api.lambda_handler(event=event, context=None)
+    assert response["statusCode"] == 400
