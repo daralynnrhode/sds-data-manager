@@ -103,7 +103,7 @@ def test_ancillary_file_upload(s3_client, ancillary_file):
     # Try to upload again and we should get a 409 duplicate error
     s3_client.put_object(
         Bucket=os.getenv("S3_BUCKET"),
-        Key=ancillary_file,
+        Key=str(ancillary_file),
         Body=b"test",
     )
     event = {
