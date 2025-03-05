@@ -4,7 +4,6 @@ from unittest.mock import patch
 
 import boto3
 import pytest
-from imap_data_access import AncillaryFilePath
 from moto import mock_events, mock_s3
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -30,9 +29,7 @@ def _set_env(monkeypatch):
 @pytest.fixture(scope="module")
 def ancillary_file():
     """Path to a valid ancillary file."""
-    return AncillaryFilePath(
-        "imap_swe_test-ancillary-description_20100101_v000.cdf"
-    ).construct_path()
+    return "imap/ancillary/swe/imap_swe_test-ancillary-description_20100101_v000.cdf"
 
 
 @pytest.fixture(scope="module")
