@@ -303,9 +303,7 @@ def metakernel_builder(
     """
     # Establish start and end times for the metakernel
     metakernel_start_time = 0 if start_time is None else start_time
-    metakernel_end_time = (
-        MAXIMUM_MISSION_J2000_TIME if end_time is None else end_time
-    )
+    metakernel_end_time = MAXIMUM_MISSION_J2000_TIME if end_time is None else end_time
     # Create the Metakernel class
     metakernel = MetaKernel(
         metakernel_start_time,
