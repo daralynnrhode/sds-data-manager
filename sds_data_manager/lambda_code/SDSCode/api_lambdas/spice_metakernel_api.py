@@ -8,7 +8,6 @@ from pathlib import Path
 import spiceypy
 
 from ..spice_utilities import (
-    MAXIMUM_MISSION_J2000_TIME,
     furnish_best_spice_file,
     metakernel_builder,
 )
@@ -85,11 +84,6 @@ def lambda_handler(event, context):
     query_start_time, query_end_time = _convert_input_times_to_j2000(
         start_time_str, end_time_str
     )
-    # Give MetaKernel numeric bounds to avoid failure if
-    # start and end dates were not provided.
-    metakernel_end_time = (
-        query_end_time if query_end_time is not None else MAXIMUM_MISSION_J2000_TIME
-    )
     spice_directory = Path(query_params.get("spice_path", ""))
     list_files = query_params.get("list_files", "false")
     require_coverage = query_params.get("require_coverage", "false")
@@ -101,8 +95,6 @@ def lambda_handler(event, context):
     metakernel = metakernel_builder(
         query_start_time,
         query_end_time,
-        metakernel_start_time,
-        metakernel_end_time,
         file_types=file_types,
     )
 
