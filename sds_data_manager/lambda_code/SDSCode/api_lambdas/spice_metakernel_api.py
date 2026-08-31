@@ -85,9 +85,8 @@ def lambda_handler(event, context):
     query_start_time, query_end_time = _convert_input_times_to_j2000(
         start_time_str, end_time_str
     )
-    # Give MetaKernal numeric bounds to avoid failure if
-    # start and end date where not provided.
-    metakernel_start_time = query_start_time if query_start_time is not None else 0
+    # Give MetaKernel numeric bounds to avoid failure if
+    # start and end dates were not provided.
     metakernel_end_time = (
         query_end_time if query_end_time is not None else MAXIMUM_MISSION_J2000_TIME
     )
