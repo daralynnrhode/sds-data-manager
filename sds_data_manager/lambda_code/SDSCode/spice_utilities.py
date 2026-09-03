@@ -299,7 +299,7 @@ def metakernel_builder(
     Returns
     -------
     MetaKernel
-        Constructed Metakernal containing all matching SPICE files.
+        Constructed MetaKernel containing all matching SPICE files.
     """
     # Establish start and end times for the metakernel
     metakernel_start_time = 0 if start_time is None else start_time
